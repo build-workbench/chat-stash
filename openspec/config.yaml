@@ -1,0 +1,37 @@
+schema: spec-driven
+
+context: |
+  ChatStash（快存）是一个将 AI 网站中的单次用户提问和对应 AI 回复保存到云端，
+  再由 Web Dashboard 统一检索、整理和导出的 Chrome Extension + SaaS MVP。
+  技术栈固定为 TypeScript、React、Plasmo、Chrome Manifest V3、Next.js App Router、
+  Tailwind CSS、shadcn/ui、Supabase Auth 和 Supabase PostgreSQL。
+  仓库采用 pnpm workspace；MVP 只支持 chatgpt.com 与 chat.deepseek.com。
+  核心原则是 MVP First、Markdown First、Adapter First、Security First。
+  浏览器中只允许使用 Supabase publishable key（或旧项目的 anon key），绝不允许 secret/service_role key。
+  所有公开 schema 中的用户数据必须启用 RLS，并以自动化测试证明用户隔离。
+  README.md 是最初的产品与架构输入；本 change 中的 spec、design 和 tasks 是实现基线。
+
+rules:
+  proposal:
+    - 明确列出非目标和破坏性变更。
+    - 每个 capability 名称必须与 specs 下的目录完全一致。
+  specs:
+    - 使用 SHALL 表达强制行为，并让每条 requirement 至少包含一个可测试 scenario。
+    - 只描述可观察行为、边界和错误语义；库、文件与函数等实现细节放入 design 或 tasks。
+  design:
+    - 明确信任边界、数据所有权、失败语义、删除语义和被否决的替代方案。
+    - 不采用未说明理由的新服务或基础设施。
+  tasks:
+    - 按依赖顺序拆分，每个任务只承担一个可验证结果。
+    - 每个阶段必须列出文件范围、自动化验证和人工验收门槛。
+    - 实现模型不得越过未完成阶段提前开发后续功能。
+
+operations:
+  apply:
+    guidance:
+      - 每次只执行 tasks.md 中一个阶段，阶段验收通过后停止并汇报。
+      - 不用 TODO、伪代码或 any 代替要求的实现。
+      - 不读取、记录或提交真实用户对话 fixture、访问令牌或密钥。
+  archive:
+    guidance:
+      - 只有全部任务和验收场景均验证通过后才能归档。
