@@ -9,6 +9,9 @@
       "default": "./src/index.ts"
     }
   },
+  "dependencies": {
+    "zod": "4.4.3"
+  },
   "scripts": {
     "lint": "eslint src test",
     "typecheck": "tsc --noEmit -p tsconfig.json",

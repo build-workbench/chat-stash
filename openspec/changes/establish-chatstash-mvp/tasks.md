@@ -168,11 +168,11 @@ packages/adapters/fixtures/common/**
 pnpm-lock.yaml
 ```
 
-- [ ] 3.1 定义 `SourcePlatform`、`CaptureDraft`（固定两消息 tuple）、background request/response、stable error codes、list/search cursor contracts；所有不可信入口有 Zod schema。
-- [ ] 3.2 实现 design §5.4 limits 和 platform-aware canonical URL；拒绝 HTTP、unsupported host、credentials、fragment 和非白名单 query，不让 caller 自行声明任意 host。
-- [ ] 3.3 明确 CaptureDraft 不接受 `user_id`、`dedupe_key`、数据库 ID 或保存时间等服务端字段；测试 unknown fields、Unicode、identifier fallback 和 field/byte 边界。
-- [ ] 3.4 引入并封装 Turndown/GFM，克隆 DOM、移除噪声、实现 code/table/list/link/formula 等规则；对无法安全转换内容降级为文本。
-- [ ] 3.5 编写 golden tests：GFM、nested elements、code whitespace、formula annotation、unsafe HTML、noise controls、empty/oversized result；fixture 全部合成且无隐私。
+- [x] 3.1 定义 `SourcePlatform`、`CaptureDraft`（固定两消息 tuple）、background request/response、stable error codes、list/search cursor contracts；所有不可信入口有 Zod schema。
+- [x] 3.2 实现 design §5.4 limits 和 platform-aware canonical URL；拒绝 HTTP、unsupported host、credentials、fragment 和非白名单 query，不让 caller 自行声明任意 host。
+- [x] 3.3 明确 CaptureDraft 不接受 `user_id`、`dedupe_key`、数据库 ID 或保存时间等服务端字段；测试 unknown fields、Unicode、identifier fallback 和 field/byte 边界。
+- [x] 3.4 引入并封装 Turndown/GFM，克隆 DOM、移除噪声、实现 code/table/list/link/formula 等规则；对无法安全转换内容降级为文本。
+- [x] 3.5 编写 golden tests：GFM、nested elements、code whitespace、formula annotation、unsafe HTML、noise controls、empty/oversized result；fixture 全部合成且无隐私。
 
 **自动验证**：
 

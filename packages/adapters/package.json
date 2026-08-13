@@ -9,6 +9,15 @@
       "default": "./src/index.ts"
     }
   },
+  "dependencies": {
+    "@chatstash/shared": "workspace:*",
+    "turndown": "7.2.4",
+    "turndown-plugin-gfm": "1.0.2"
+  },
+  "devDependencies": {
+    "@types/turndown": "5.0.6",
+    "jsdom": "30.0.1"
+  },
   "scripts": {
     "lint": "eslint src test",
     "typecheck": "tsc --noEmit -p tsconfig.json",
