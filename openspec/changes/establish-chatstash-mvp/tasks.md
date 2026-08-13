@@ -75,11 +75,11 @@ packages/adapters/src/index.ts
 packages/adapters/test/**
 ```
 
-- [ ] 1.1 确认当前稳定且相互兼容的 Node、pnpm、Next.js、React、Plasmo、TypeScript 和测试工具版本；写入 `engines`/`packageManager`，不使用未锁定的 `latest`。
-- [ ] 1.2 建立 pnpm workspace 根脚本：`dev`、`build`、`lint`、`typecheck`、`test`、`format:check`；保持 `strict: true`，避免 packages 间源码深路径导入。
-- [ ] 1.3 创建四个 workspace 的最小入口和 project references/paths，使空骨架可以 typecheck/test；不要生成 Dashboard 页面、Adapter 或 Supabase client。
-- [ ] 1.4 创建分应用 `.env.example`：只列 Supabase URL、publishable key、Web URL 等公开配置名，不放真实值或 privileged key。
-- [ ] 1.5 配置 lint/format/test，增加一个 shared smoke test 和一个 adapters smoke test，证明 runner 能执行两个 package。
+- [x] 1.1 确认当前稳定且相互兼容的 Node、pnpm、Next.js、React、Plasmo、TypeScript 和测试工具版本；写入 `engines`/`packageManager`，不使用未锁定的 `latest`。
+- [x] 1.2 建立 pnpm workspace 根脚本：`dev`、`build`、`lint`、`typecheck`、`test`、`format:check`；保持 `strict: true`，避免 packages 间源码深路径导入。
+- [x] 1.3 创建四个 workspace 的最小入口和 project references/paths，使空骨架可以 typecheck/test；不要生成 Dashboard 页面、Adapter 或 Supabase client。
+- [x] 1.4 创建分应用 `.env.example`：只列 Supabase URL、publishable key、Web URL 等公开配置名，不放真实值或 privileged key。
+- [x] 1.5 配置 lint/format/test，增加一个 shared smoke test 和一个 adapters smoke test，证明 runner 能执行两个 package。
 
 **自动验证**：
 
