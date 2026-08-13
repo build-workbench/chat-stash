@@ -116,14 +116,14 @@ package.json                 # 仅数据库脚本
 packages/shared/src/database.types.ts  # 仅通过 CLI 生成
 ```
 
-- [ ] 2.1 初始化 Supabase local config；按职责拆 migration（extensions/enums、tables/constraints/indexes、triggers、RLS/grants、RPC/search），确保按文件名顺序从空库执行。
-- [ ] 2.2 创建六表 schema、timestamps、长度/check/role-position 约束、同用户复合外键、unique/index 和 `auth.users → profiles` trigger；migration 回填已有 Auth 用户。
-- [ ] 2.3 实现 folder 层级验证和 `delete_folder_v1`，包含 transaction advisory lock、防自环/后代环、子项提升、conversation 置 NULL、冲突整单回滚。
-- [ ] 2.4 实现 hardened `save_capture_v1`：auth ownership、canonical host/limit 重检、数据库唯一计算的版本化 SHA-256 dedupe、原子两消息插入、并发 duplicate 返回已有 ID；pgTAP 固定 hash vectors，客户端不提交 dedupe key。
-- [ ] 2.5 建立 explicit default revoke、逐对象 grants 和全部 RLS policy；authenticated 不得直接插入 conversation/message 或直接删除 folder。
-- [ ] 2.6 实现 `search_conversations_v1`、FTS/trigram 索引、rank、folder/tag filter 与 deterministic cursor；函数不拼接动态 SQL。
-- [ ] 2.7 编写 pgTAP/SQL tests：user A/B CRUD 与越权、跨用户 FK、RLS、RPC unauthorized/created/duplicate/concurrent、回滚、cascade、folder cycle/delete conflict、英文/中文 search、rank/cursor/filter。
-- [ ] 2.8 从 reset 后数据库生成 TypeScript types，禁止手写猜测生成类型。
+- [x] 2.1 初始化 Supabase local config；按职责拆 migration（extensions/enums、tables/constraints/indexes、triggers、RLS/grants、RPC/search），确保按文件名顺序从空库执行。
+- [x] 2.2 创建六表 schema、timestamps、长度/check/role-position 约束、同用户复合外键、unique/index 和 `auth.users → profiles` trigger；migration 回填已有 Auth 用户。
+- [x] 2.3 实现 folder 层级验证和 `delete_folder_v1`，包含 transaction advisory lock、防自环/后代环、子项提升、conversation 置 NULL、冲突整单回滚。
+- [x] 2.4 实现 hardened `save_capture_v1`：auth ownership、canonical host/limit 重检、数据库唯一计算的版本化 SHA-256 dedupe、原子两消息插入、并发 duplicate 返回已有 ID；pgTAP 固定 hash vectors，客户端不提交 dedupe key。
+- [x] 2.5 建立 explicit default revoke、逐对象 grants 和全部 RLS policy；authenticated 不得直接插入 conversation/message 或直接删除 folder。
+- [x] 2.6 实现 `search_conversations_v1`、FTS/trigram 索引、rank、folder/tag filter 与 deterministic cursor；函数不拼接动态 SQL。
+- [x] 2.7 编写 pgTAP/SQL tests：user A/B CRUD 与越权、跨用户 FK、RLS、RPC unauthorized/created/duplicate/concurrent、回滚、cascade、folder cycle/delete conflict、英文/中文 search、rank/cursor/filter。
+- [x] 2.8 从 reset 后数据库生成 TypeScript types，禁止手写猜测生成类型。
 
 **自动验证**：
 

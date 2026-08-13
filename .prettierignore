@@ -2,3 +2,6 @@ README.md
 docs/
 openspec/
 pnpm-lock.yaml
+packages/shared/src/database.types.ts
+supabase/.temp/
+supabase/.branches/

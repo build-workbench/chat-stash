@@ -12,6 +12,7 @@ export default tseslint.config(
       '**/.out/**',
       '**/.plasmo/**',
       '**/coverage/**',
+      '**/database.types.ts',
     ],
   },
   js.configs.recommended,

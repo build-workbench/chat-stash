@@ -12,7 +12,11 @@
     "lint": "corepack pnpm -r lint",
     "typecheck": "corepack pnpm -r typecheck",
     "test": "corepack pnpm -r test",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "db:reset": "supabase db reset",
+    "db:lint": "supabase db lint --level warning",
+    "db:test": "supabase test db",
+    "db:types": "supabase gen types typescript --local > packages/shared/src/database.types.ts"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

@@ -1,0 +1,2 @@
+-- ChatStash local seed data.
+-- Intentionally empty: database tests create their own isolated fixtures.
