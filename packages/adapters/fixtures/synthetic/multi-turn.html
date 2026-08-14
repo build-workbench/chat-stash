@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <body>
+    <main
+      data-chatstash-conversation="synthetic-conv-multi"
+      data-chatstash-source-url="https://chatgpt.com/c/synthetic-conv-multi"
+    >
+      <article class="turn" data-chatstash-turn="user" data-chatstash-message-id="u1">
+        <div class="body" data-chatstash-body><p>What is a closure?</p></div>
+      </article>
+      <article
+        class="turn"
+        data-chatstash-turn="assistant"
+        data-chatstash-message-id="a1"
+        data-chatstash-state="complete"
+      >
+        <div class="body" data-chatstash-body><p>A closure captures its lexical scope.</p></div>
+      </article>
+      <article class="turn" data-chatstash-turn="user" data-chatstash-message-id="u2">
+        <div class="body" data-chatstash-body><p>Give a JavaScript example.</p></div>
+      </article>
+      <article
+        class="turn"
+        data-chatstash-turn="assistant"
+        data-chatstash-message-id="a2"
+        data-chatstash-state="complete"
+      >
+        <div class="body" data-chatstash-body>
+          <p><code>function makeCounter() { let n = 0; return () =&gt; ++n }</code></p>
+        </div>
+      </article>
+      <article class="turn" data-chatstash-turn="user" data-chatstash-message-id="u3">
+        <div class="body" data-chatstash-body><p>Why does it preserve n?</p></div>
+      </article>
+      <article
+        class="turn"
+        data-chatstash-turn="assistant"
+        data-chatstash-message-id="a3"
+        data-chatstash-state="complete"
+      >
+        <div class="body" data-chatstash-body>
+          <p>Because the returned function closes over n.</p>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

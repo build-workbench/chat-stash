@@ -294,11 +294,11 @@ apps/extension/src/ui/save-control/**
 apps/extension/test/content/**
 ```
 
-- [ ] 6.1 实现 `SiteAdapter`、target/capture/diagnostic 类型和显式 registry；Adapter 无 observer/network/auth/UI side effect。
-- [ ] 6.2 实现仅开发/测试使用的 synthetic Adapter + fixture，覆盖多轮 prompt 配对、streaming、invalid 和 DOM replacement。
-- [ ] 6.3 实现 content runtime：当前 URL match、以 Plasmo CSUI 为唯一永久 discovery observer、incremental/debounced discovery、route change cleanup、WeakMap target tracking、重复 mount 防护；不得叠加第二个 document 级 observer。
-- [ ] 6.4 用 Plasmo Shadow DOM/inline anchors 实现 Save 控件和 finite state machine；点击时重新校验 streaming，saving 锁定，正确显示 created/duplicate/error/retry。
-- [ ] 6.5 测试新增/替换节点、SPA URL 变化、cleanup、多个 targets、一 target 一 control 和 error mapping。
+- [x] 6.1 实现 `SiteAdapter`、target/capture/diagnostic 类型和显式 registry；Adapter 无 observer/network/auth/UI side effect。
+- [x] 6.2 实现仅开发/测试使用的 synthetic Adapter + fixture，覆盖多轮 prompt 配对、streaming、invalid 和 DOM replacement。
+- [x] 6.3 实现 content runtime：当前 URL match、以 Plasmo CSUI 为唯一永久 discovery observer、incremental/debounced discovery、route change cleanup、WeakMap target tracking、重复 mount 防护；不得叠加第二个 document 级 observer。
+- [x] 6.4 用 Plasmo Shadow DOM/inline anchors 实现 Save 控件和 finite state machine；点击时重新校验 streaming，saving 锁定，正确显示 created/duplicate/error/retry。
+- [x] 6.5 测试新增/替换节点、SPA URL 变化、cleanup、多个 targets、一 target 一 control 和 error mapping。
 
 **自动验证**：
 

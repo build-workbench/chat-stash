@@ -2,7 +2,9 @@ import type { SourcePlatform } from '@chatstash/shared'
 
 /** Platform hosts are the same allowlist the shared canonicalizer enforces. */
 const PLATFORM_HOSTS: Record<SourcePlatform, readonly string[]> = {
-  chatgpt: ['chatgpt.com'],
+  // synthetic.chatstash.test is the dev/test fixture host (Stage 6); it is
+  // removed once real platform adapters replace the synthetic vertical slice.
+  chatgpt: ['chatgpt.com', 'synthetic.chatstash.test'],
   deepseek: ['chat.deepseek.com'],
 }
 

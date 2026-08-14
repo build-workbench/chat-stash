@@ -9,6 +9,6 @@
     },
     "incremental": true
   },
-  "include": [".plasmo/index.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [".plasmo/index.d.ts", "**/*.ts", "**/*.tsx", "../../packages/adapters/src/**/*.d.ts"],
   "exclude": ["node_modules", "build", ".plasmo", "dist"]
 }

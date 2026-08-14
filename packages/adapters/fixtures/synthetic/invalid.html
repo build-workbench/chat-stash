@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <body>
+    <main
+      data-chatstash-conversation="synthetic-conv-invalid"
+      data-chatstash-title="Synthetic invalid chat"
+      data-chatstash-source-url="https://chatgpt.com/c/synthetic-conv-invalid"
+    >
+      <!-- Assistant without a preceding user turn: must fail closed. -->
+      <article
+        class="turn"
+        data-chatstash-turn="assistant"
+        data-chatstash-message-id="a1"
+        data-chatstash-state="complete"
+      >
+        <div class="body" data-chatstash-body><p>Orphaned assistant response.</p></div>
+      </article>
+      <article class="turn" data-chatstash-turn="user" data-chatstash-message-id="u1">
+        <div class="body" data-chatstash-body><p>Hello?</p></div>
+      </article>
+      <article
+        class="turn"
+        data-chatstash-turn="assistant"
+        data-chatstash-message-id="a2"
+        data-chatstash-state="complete"
+      >
+        <div class="body" data-chatstash-body><p>Hi, how can I help?</p></div>
+      </article>
+    </main>
+  </body>
+</html>
