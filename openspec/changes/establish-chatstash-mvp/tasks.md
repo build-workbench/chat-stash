@@ -254,11 +254,11 @@ apps/extension/.env.example
 pnpm-lock.yaml
 ```
 
-- [ ] 5.1 在 background 创建唯一 Supabase client 和 `chrome.storage.local` adapter；将 storage access level 限制为 trusted contexts，测试 worker 重建后 session 恢复。
-- [ ] 5.2 实现 popup 的 email/password sign-in、auth status、sign-out 和 Web sign-up/recovery link；密码不持久化、不记录。
-- [ ] 5.3 建立有限 typed handlers `auth-status/sign-in/sign-out/save-capture`；每个 handler 用共享 schema 校验，并落实 design §7.6 sender matrix；不建通用 fetch proxy，不声明 `externally_connectable`。
-- [ ] 5.4 `save-capture` 校验 sender/top frame/supported tab、platform/source URL 一致性、field/byte limits 和 session，再调用 RPC 并映射 created/duplicate/stable errors。
-- [ ] 5.5 通过测试-only mock content caller 或固定合成 payload 打通真实本地 Supabase 保存；测试 unauthorized、forged sender、oversized、duplicate、network/RPC errors。
+- [x] 5.1 在 background 创建唯一 Supabase client 和 `chrome.storage.local` adapter；将 storage access level 限制为 trusted contexts，测试 worker 重建后 session 恢复。
+- [x] 5.2 实现 popup 的 email/password sign-in、auth status、sign-out 和 Web sign-up/recovery link；密码不持久化、不记录。
+- [x] 5.3 建立有限 typed handlers `auth-status/sign-in/sign-out/save-capture`；每个 handler 用共享 schema 校验，并落实 design §7.6 sender matrix；不建通用 fetch proxy，不声明 `externally_connectable`。
+- [x] 5.4 `save-capture` 校验 sender/top frame/supported tab、platform/source URL 一致性、field/byte limits 和 session，再调用 RPC 并映射 created/duplicate/stable errors。
+- [x] 5.5 通过测试-only mock content caller 或固定合成 payload 打通真实本地 Supabase 保存；测试 unauthorized、forged sender、oversized、duplicate、network/RPC errors。
 
 **自动验证**：
 

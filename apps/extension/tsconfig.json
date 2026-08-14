@@ -3,7 +3,12 @@
   "compilerOptions": {
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
-    "types": ["node"]
+    "types": ["node", "chrome"],
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "incremental": true
   },
-  "include": ["src/**/*.ts"]
+  "include": [".plasmo/index.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "build", ".plasmo", "dist"]
 }

@@ -7,15 +7,29 @@
     "dev": "plasmo dev",
     "build": "plasmo build",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
   },
   "dependencies": {
+    "@chatstash/shared": "workspace:*",
+    "@supabase/supabase-js": "2.112.3",
     "plasmo": "0.90.5",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
+    "@types/chrome": "0.2.6",
     "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.4"
+    "@types/react-dom": "19.2.4",
+    "vitest": "4.1.10"
+  },
+  "displayName": "ChatStash",
+  "manifest": {
+    "permissions": [
+      "storage"
+    ],
+    "host_permissions": [
+      "http://127.0.0.1:54321/*"
+    ]
   }
 }
