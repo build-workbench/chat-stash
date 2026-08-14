@@ -5,3 +5,4 @@ pnpm-lock.yaml
 packages/shared/src/database.types.ts
 supabase/.temp/
 supabase/.branches/
+**/next-env.d.ts

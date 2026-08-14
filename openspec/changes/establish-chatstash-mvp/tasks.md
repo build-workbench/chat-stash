@@ -211,11 +211,11 @@ apps/web/.env.example
 pnpm-lock.yaml
 ```
 
-- [ ] 4.1 根据实施时官方 Next.js/Supabase SSR 文档创建 browser/server clients 和 cookie refresh proxy；禁止使用已弃用 helper 或 privileged key。
-- [ ] 4.2 实现 email/password sign-up、sign-in、sign-out、confirmation callback、forgot/reset password；callback 的 next 参数只能跳转站内安全路径。
-- [ ] 4.3 保护 Dashboard shell，远端验证用户；unauthenticated/expired session 不渲染受保护内容。
-- [ ] 4.4 实现 loading/error/success 状态和不泄露账户存在性的 auth 文案。
-- [ ] 4.5 测试 validation、safe redirect、callback error、route protection 和 sign-out；使用 mock boundary，不伪造 Supabase SDK 不存在的 API。
+- [x] 4.1 根据实施时官方 Next.js/Supabase SSR 文档创建 browser/server clients 和 cookie refresh proxy；禁止使用已弃用 helper 或 privileged key。
+- [x] 4.2 实现 email/password sign-up、sign-in、sign-out、confirmation callback、forgot/reset password；callback 的 next 参数只能跳转站内安全路径。
+- [x] 4.3 保护 Dashboard shell，远端验证用户；unauthenticated/expired session 不渲染受保护内容。
+- [x] 4.4 实现 loading/error/success 状态和不泄露账户存在性的 auth 文案。
+- [x] 4.5 测试 validation、safe redirect、callback error、route protection 和 sign-out；使用 mock boundary，不伪造 Supabase SDK 不存在的 API。
 
 **自动验证**：
 
