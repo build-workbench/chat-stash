@@ -14,6 +14,11 @@ vi.mock('@/lib/supabase/server', () => ({
   createClient: () => mockCreateClient(),
 }))
 
+vi.mock('@/features/folders/queries', () => ({
+  listFolders: async () => ({ ok: true, data: [] }),
+  listTags: async () => ({ ok: true, data: [] }),
+}))
+
 import DashboardLayout from '@/app/(dashboard)/layout'
 
 describe('dashboard route protection', () => {
