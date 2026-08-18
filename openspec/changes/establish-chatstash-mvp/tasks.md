@@ -333,10 +333,10 @@ packages/adapters/src/registry.ts
 apps/extension/package.json 或 Plasmo manifest 配置  # 仅 DeepSeek host
 ```
 
-- [ ] 7.1 从 fixture 记录 primary/fallback/validation 表，不使用无法解释的生成 class 作为唯一 selector。
-- [ ] 7.2 实现 DeepSeek URL match、response targets、prompt pairing、mount point、streaming、source metadata、canonical URL 和 message extraction。
-- [ ] 7.3 用共享 Markdown converter 排除 copy/regenerate/feedback/ChatStash UI 等噪声；不复制核心保存逻辑。
-- [ ] 7.4 完成 Adapter contract tests 与 fixture snapshots，验证 primary/fallback/streaming/invalid、多轮早期 response。
+- [x] 7.1 从 fixture 记录 primary/fallback/validation 表，不使用无法解释的生成 class 作为唯一 selector。
+- [x] 7.2 实现 DeepSeek URL match、response targets、prompt pairing、mount point、streaming、source metadata、canonical URL 和 message extraction。
+- [x] 7.3 用共享 Markdown converter 排除 copy/regenerate/feedback/ChatStash UI 等噪声；不复制核心保存逻辑。
+- [x] 7.4 完成 Adapter contract tests 与 fixture snapshots，验证 primary/fallback/streaming/invalid、多轮早期 response。
 - [ ] 7.5 只增加 `https://chat.deepseek.com/*` 页面权限，生产 build 后真实站点 smoke test 保存与 duplicate。
 
 **自动验证**：
@@ -373,11 +373,11 @@ packages/adapters/src/registry.ts
 apps/extension/package.json 或 Plasmo manifest 配置  # 仅 ChatGPT host
 ```
 
-- [ ] 8.1 记录并实现 ChatGPT primary/fallback/validation、URL match、targets、pair、mount、streaming、metadata 与 extraction。
-- [ ] 8.2 对 regenerate/branch/编辑后的 DOM 只保存当前目标所属的可验证 prompt-response pair；模糊时 fail closed。
-- [ ] 8.3 使用相同 contract suite，补 ChatGPT 专有 fixtures；不得在 content runtime 加 `if ChatGPT` 分支。
+- [x] 8.1 记录并实现 ChatGPT primary/fallback/validation、URL match、targets、pair、mount、streaming、metadata 与 extraction。
+- [x] 8.2 对 regenerate/branch/编辑后的 DOM 只保存当前目标所属的可验证 prompt-response pair；模糊时 fail closed。
+- [x] 8.3 使用相同 contract suite，补 ChatGPT 专有 fixtures；不得在 content runtime 加 `if ChatGPT` 分支。
 - [ ] 8.4 只增加 `https://chatgpt.com/*` 页面权限，生产 build 后完成真实站点保存、duplicate、SPA smoke。
-- [ ] 8.5 对两个 Adapter 运行一致性测试，证明新增 ChatGPT 未破坏 DeepSeek。
+- [x] 8.5 对两个 Adapter 运行一致性测试，证明新增 ChatGPT 未破坏 DeepSeek。
 
 **自动验证**：
 
@@ -413,11 +413,11 @@ apps/web/package.json
 pnpm-lock.yaml
 ```
 
-- [ ] 9.1 实现 Sidebar/List/Viewer 响应式 shell；初始数据来自真实 Supabase，不使用长期 mock。
-- [ ] 9.2 实现 owned conversation summary cursor query，固定 `saved_at DESC,id DESC`，每页默认 30；empty/loading/error 与 no data 区分。
-- [ ] 9.3 实现 detail query、ordered messages、same not-found for missing/unowned、canonical source link 和 metadata。
-- [ ] 9.4 实现无 raw HTML 的 GFM Markdown renderer、static code highlight、safe protocols/rel；恶意 Markdown tests 证明不执行。
-- [ ] 9.5 实现明确确认的 conversation delete 和失败 reconciliation；级联结果由数据库测试覆盖。
+- [x] 9.1 实现 Sidebar/List/Viewer 响应式 shell；初始数据来自真实 Supabase，不使用长期 mock。
+- [x] 9.2 实现 owned conversation summary cursor query，固定 `saved_at DESC,id DESC`，每页默认 30；empty/loading/error 与 no data 区分。
+- [x] 9.3 实现 detail query、ordered messages、same not-found for missing/unowned、canonical source link 和 metadata。
+- [x] 9.4 实现无 raw HTML 的 GFM Markdown renderer、static code highlight、safe protocols/rel；恶意 Markdown tests 证明不执行。
+- [x] 9.5 实现明确确认的 conversation delete 和失败 reconciliation；级联结果由数据库测试覆盖。
 
 **自动验证**：
 
@@ -452,12 +452,12 @@ apps/web/test/folders/**
 apps/web/test/tags/**
 ```
 
-- [ ] 10.1 从一次 owned flat folder query 构建 UI tree；防御 orphan/cycle 只用于显示错误，数据库仍是权威；不做每节点 N+1 查询。
-- [ ] 10.2 实现 folder create/rename/reparent，父级选择排除自身/后代；数据库 conflict/cycle 错误映射为可修正文案。
-- [ ] 10.3 删除必须调用 `delete_folder_v1`，对提升重名显示冲突并保持 UI/数据库不变；成功后刷新 tree/list。
-- [ ] 10.4 实现 conversation move/clear folder；folder filter 只匹配直接归属。
-- [ ] 10.5 实现 tag create/rename/delete、attach/detach 幂等和 tag filter；folder + tag 取交集。
-- [ ] 10.6 测试 deep tree、cycle candidate、same normalized name、delete promote/conflict、cross-user action、combined filters 和 errors。
+- [x] 10.1 从一次 owned flat folder query 构建 UI tree；防御 orphan/cycle 只用于显示错误，数据库仍是权威；不做每节点 N+1 查询。
+- [x] 10.2 实现 folder create/rename/reparent，父级选择排除自身/后代；数据库 conflict/cycle 错误映射为可修正文案。
+- [x] 10.3 删除必须调用 `delete_folder_v1`，对提升重名显示冲突并保持 UI/数据库不变；成功后刷新 tree/list。
+- [x] 10.4 实现 conversation move/clear folder；folder filter 只匹配直接归属。
+- [x] 10.5 实现 tag create/rename/delete、attach/detach 幂等和 tag filter；folder + tag 取交集。
+- [x] 10.6 测试 deep tree、cycle candidate、same normalized name、delete promote/conflict、cross-user action、combined filters 和 errors。
 
 **自动验证**：同阶段 9，外加 `supabase test db`。
 
@@ -485,11 +485,11 @@ supabase/migrations/**              # 仅在阶段 2 基线需经证据修正时
 supabase/tests/database/search*.sql
 ```
 
-- [ ] 11.1 实现 trim、2..200 限制、debounce、URL query/filter state 和 query 变化取消/忽略旧响应；空白退出 search。
-- [ ] 11.2 调用 `search_conversations_v1`，展示 summary 与 deterministic cursor page；不把完整 messages 或 HTML highlight 返回列表。
-- [ ] 11.3 支持 folder/tag/search 交集；query/filter 变化丢弃旧 cursor。
-- [ ] 11.4 测试 title 优先、body-only、Chinese substring、case、punctuation/operator input、same conversation once、no-result vs error、cross-user isolation 和 pagination。
-- [ ] 11.5 使用代表性数据运行 EXPLAIN，确认 owner filter 与至少一种 FTS/trigram 索引路径可用；记录结果，不为小样本强行调参。
+- [x] 11.1 实现 trim、2..200 限制、debounce、URL query/filter state 和 query 变化取消/忽略旧响应；空白退出 search。
+- [x] 11.2 调用 `search_conversations_v1`，展示 summary 与 deterministic cursor page；不把完整 messages 或 HTML highlight 返回列表。
+- [x] 11.3 支持 folder/tag/search 交集；query/filter 变化丢弃旧 cursor。
+- [x] 11.4 测试 title 优先、body-only、Chinese substring、case、punctuation/operator input、same conversation once、no-result vs error、cross-user isolation 和 pagination。
+- [x] 11.5 使用代表性数据运行 EXPLAIN，确认 owner filter 与至少一种 FTS/trigram 索引路径可用；记录结果，不为小样本强行调参。
 
 **自动验证**：Web 门禁 + `supabase test db` + `supabase db lint --level warning`。
 
@@ -513,10 +513,10 @@ apps/web/features/conversations/**  # 仅 detail action integration
 apps/web/test/export/**
 ```
 
-- [ ] 12.1 实现纯 formatter：固定 metadata、position order、optional omission、verbatim stored Markdown 和单个 final newline。
-- [ ] 12.2 实现 safe filename：非法/控制字符、reserved names、dot path、长度、empty fallback 和 `.md` 后缀。
-- [ ] 12.3 实现 browser Blob download adapter；unowned/not-found 不生成文件，不写 Supabase Storage。
-- [ ] 12.4 用 golden tests 覆盖 code fence/table/link/Unicode/optional metadata/ISO time/unsafe filename；detail UI 完成一次下载。
+- [x] 12.1 实现纯 formatter：固定 metadata、position order、optional omission、verbatim stored Markdown 和单个 final newline。
+- [x] 12.2 实现 safe filename：非法/控制字符、reserved names、dot path、长度、empty fallback 和 `.md` 后缀。
+- [x] 12.3 实现 browser Blob download adapter；unowned/not-found 不生成文件，不写 Supabase Storage。
+- [x] 12.4 用 golden tests 覆盖 code fence/table/link/Unicode/optional metadata/ISO time/unsafe filename；detail UI 完成一次下载。
 
 **自动验证**：Web lint/typecheck/test/build。
 
@@ -543,12 +543,12 @@ package.json
 pnpm-lock.yaml
 ```
 
-- [ ] 13.1 全量 dependency/secret/permission audit：无 privileged key、真实 fixture/token、`<all_urls>`、多余 Chrome permission、raw HTML renderer 或完整正文日志。
+- [x] 13.1 全量 dependency/secret/permission audit：无 privileged key、真实 fixture/token、`<all_urls>`、多余 Chrome permission、raw HTML renderer 或完整正文日志。
 - [ ] 13.2 运行 fresh clone/frozen install、format/lint/typecheck/unit tests、Supabase reset/lint/pgTAP、generated type diff、Web/Extension production builds。
 - [ ] 13.3 用 user A/B 执行端到端安全回归；核对 Data API grants、RLS enabled、function EXECUTE、cross-owner opaque not-found。
 - [ ] 13.4 在当前 ChatGPT/DeepSeek 做 Adapter smoke；记录日期、浏览器/extension build、primary/fallback、streaming、SPA、duplicate 结果，不记录对话正文。
-- [ ] 13.5 检查 MutationObserver 批处理/cleanup、Extension bundle/permissions、Dashboard list/search query count 和 representative EXPLAIN；只修有证据的问题。
-- [ ] 13.6 编写 `docs/release-checklist.md`：Supabase migration/redirect/env、Vercel/Web deploy、Extension unpacked/Chrome Web Store 手工步骤、rollback、已知限制。
+- [x] 13.5 检查 MutationObserver 批处理/cleanup、Extension bundle/permissions、Dashboard list/search query count 和 representative EXPLAIN；只修有证据的问题。
+- [x] 13.6 编写 `docs/release-checklist.md`：Supabase migration/redirect/env、Vercel/Web deploy、Extension unpacked/Chrome Web Store 手工步骤、rollback、已知限制。
 - [ ] 13.7 对照 7 个 spec 逐场景验证实现证据，运行 OpenSpec strict validation；未实现/未测 scenario 不得标完成或归档。
 
 **最终自动验证**：
