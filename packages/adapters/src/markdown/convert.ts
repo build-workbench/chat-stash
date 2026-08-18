@@ -65,6 +65,14 @@ function createTurndownService(): TurndownService {
     replacement: (_content, node) => `$${node.getAttribute('data-formula') ?? ''}$`,
   })
 
+  service.addRule('preWithoutCode', {
+    filter: (node) => node.nodeName === 'PRE' && node.querySelector('code') === null,
+    replacement: (_content, node) => {
+      const text = (node.textContent ?? '').replace(/\n$/, '')
+      return text === '' ? '' : `\n\n\`\`\`\n${text}\n\`\`\`\n\n`
+    },
+  })
+
   service.addRule('unsafeElements', {
     filter: ['iframe', 'object', 'embed', 'form'],
     replacement: () => '',

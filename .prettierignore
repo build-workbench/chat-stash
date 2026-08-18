@@ -3,6 +3,9 @@ docs/
 openspec/
 pnpm-lock.yaml
 packages/shared/src/database.types.ts
+packages/adapters/fixtures/**
+scripts/**
+diag-deepseek.mjs
 supabase/.temp/
 supabase/.branches/
 **/next-env.d.ts

@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <body>
+    <!-- ChatGPT public DOM contract (data-message-author-role / data-message-id). Sampled pattern 2026-08; synthetic content only. -->
+    <main>
+      <article data-testid="conversation-turn-1" data-turn="user">
+        <div data-message-author-role="user" data-message-id="user-1">
+          <div class="whitespace-pre-wrap">What is test-driven development?</div>
+        </div>
+      </article>
+      <article data-testid="conversation-turn-2" data-turn="assistant">
+        <div data-message-author-role="assistant" data-message-id="asst-1">
+          <div class="markdown">
+            <p>TDD writes a failing test before production code.</p>
+            <pre><code class="language-js">function add(a, b) {
+  return a + b
+}</code></pre>
+          </div>
+        </div>
+      </article>
+      <article data-testid="conversation-turn-3" data-turn="user">
+        <div data-message-author-role="user" data-message-id="user-2">
+          <div class="whitespace-pre-wrap">Show a table of red-green-refactor.</div>
+        </div>
+      </article>
+      <article data-testid="conversation-turn-4" data-turn="assistant">
+        <div data-message-author-role="assistant" data-message-id="asst-2">
+          <div class="markdown">
+            <table>
+              <thead>
+                <tr>
+                  <th>Step</th>
+                  <th>Goal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Red</td>
+                  <td>Failing test</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

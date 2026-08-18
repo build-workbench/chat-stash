@@ -1,12 +1,13 @@
-2026-08-14T07:10:30.089Z | https://chat.deepseek.com/a/chat/s/7f31f323-e4eb-4041-9f25-539bfbb9c7cd | messages=2 code=8 table=0
-2026-08-14T07:10:32.602Z | https://chat.deepseek.com/a/chat/s/3947e4b5-3297-4fe7-8fb6-6b5e7750ab68 | messages=2 code=8 table=0
-2026-08-14T07:10:40.632Z | https://chat.deepseek.com/a/chat/s/7c853274-f5df-430b-9d0b-efe86d73cbea | messages=2 code=0 table=1
-2026-08-14T07:10:43.146Z | https://chat.deepseek.com/a/chat/s/42762beb-1bf1-434a-aa21-f8ddfb498260 | messages=2 code=0 table=1
-2026-08-14T07:10:47.180Z | https://chat.deepseek.com/a/chat/s/7c853274-f5df-430b-9d0b-efe86d73cbea | messages=2 code=0 table=1
-2026-08-14T07:10:51.196Z | https://chat.deepseek.com/a/chat/s/e3e4729a-2edc-4f2b-a4e5-0fba5d051096 | messages=2 code=0 table=1
-2026-08-14T07:10:53.732Z | https://chat.deepseek.com/a/chat/s/c8f52c59-bb68-4ed5-ab30-c16e59dd11e9 | messages=2 code=0 table=1
-2026-08-14T07:11:06.225Z | https://chat.deepseek.com/a/chat/s/1fc83d20-6b53-4ef1-8826-9c3df3f6b75f | messages=2 code=0 table=0
-2026-08-14T07:11:14.743Z | https://chat.deepseek.com/a/chat/s/4d2734e5-115f-4c60-98a8-0067e4f07432 | messages=2 code=0 table=0
-2026-08-14T07:11:20.254Z | https://chat.deepseek.com/a/chat/s/02f4e67d-2c37-45d7-804f-7f4ab13cf6cd | messages=2 code=0 table=0
-2026-08-14T07:11:33.305Z | https://chat.deepseek.com/a/chat/s/3f07d5af-2a35-45ce-91c4-1c29c04c0835 | messages=2 code=1 table=0
-2026-08-14T07:25:36.733Z | https://chat.deepseek.com/a/chat/s/dcc38f20-7b87-4da8-a2a2-66f211e30e17 | messages=2 code=1 table=0
+sampled: 2026-08-14; urls redacted to conversation-id placeholders; no account identifiers
+2026-08-14T07:10:30.089Z | https://chat.deepseek.com/a/chat/s/conv-code-1 | messages=2 code=8 table=0
+2026-08-14T07:10:32.602Z | https://chat.deepseek.com/a/chat/s/conv-code-2 | messages=2 code=8 table=0
+2026-08-14T07:10:40.632Z | https://chat.deepseek.com/a/chat/s/conv-table-1 | messages=2 code=0 table=1
+2026-08-14T07:10:43.146Z | https://chat.deepseek.com/a/chat/s/conv-table-2 | messages=2 code=0 table=1
+2026-08-14T07:10:47.180Z | https://chat.deepseek.com/a/chat/s/conv-table-1 | messages=2 code=0 table=1
+2026-08-14T07:10:51.196Z | https://chat.deepseek.com/a/chat/s/conv-table-3 | messages=2 code=0 table=1
+2026-08-14T07:10:53.732Z | https://chat.deepseek.com/a/chat/s/conv-table-4 | messages=2 code=0 table=1
+2026-08-14T07:11:06.225Z | https://chat.deepseek.com/a/chat/s/conv-basic-1 | messages=2 code=0 table=0
+2026-08-14T07:11:14.743Z | https://chat.deepseek.com/a/chat/s/conv-basic-2 | messages=2 code=0 table=0
+2026-08-14T07:11:20.254Z | https://chat.deepseek.com/a/chat/s/conv-basic-3 | messages=2 code=0 table=0
+2026-08-14T07:11:33.305Z | https://chat.deepseek.com/a/chat/s/conv-code-single | messages=2 code=1 table=0
+2026-08-14T07:25:36.733Z | https://chat.deepseek.com/a/chat/s/conv-multi-turn | messages=2 code=1 table=0

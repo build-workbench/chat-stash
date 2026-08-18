@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <body>
+    <main>
+      <article data-testid="conversation-turn-1" data-turn="user">
+        <div data-message-author-role="user" data-message-id="user-1">
+          <div>Write a haiku about rain.</div>
+        </div>
+      </article>
+      <article data-testid="conversation-turn-2" data-turn="assistant">
+        <div data-message-author-role="assistant" data-message-id="asst-stream">
+          <div class="markdown">
+            <p>Soft rain on the roof…</p>
+            <div class="result-streaming"></div>
+          </div>
+        </div>
+      </article>
+    </main>
+    <button type="button" data-testid="stop-button" aria-label="Stop streaming">Stop</button>
+  </body>
+</html>
