@@ -55,6 +55,15 @@ describe('isSupportedContentSender', () => {
     ).toEqual({ ok: false, reason: 'unsupported-host' })
   })
 
+  test('rejects the synthetic fixture host when the dev flag is off', () => {
+    process.env.PLASMO_PUBLIC_ENABLE_SYNTHETIC = ''
+    expect(
+      isSupportedContentSender(
+        sender({ frameId: 0, url: 'https://synthetic.chatstash.test/c/1', tab: { id: 7 } }),
+      ),
+    ).toEqual({ ok: false, reason: 'unsupported-host' })
+  })
+
   test('rejects a popup pretending to be content', () => {
     expect(
       isSupportedContentSender(sender({ frameId: 0, url: 'https://chatgpt.com/c/123' })),

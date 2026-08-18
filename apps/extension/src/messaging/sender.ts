@@ -1,11 +1,15 @@
 import type { SourcePlatform } from '@chatstash/shared'
 
-/** Platform hosts are the same allowlist the shared canonicalizer enforces. */
-const PLATFORM_HOSTS: Record<SourcePlatform, readonly string[]> = {
-  // synthetic.chatstash.test is the dev/test fixture host (Stage 6); it is
-  // removed once real platform adapters replace the synthetic vertical slice.
-  chatgpt: ['chatgpt.com', 'synthetic.chatstash.test'],
-  deepseek: ['chat.deepseek.com'],
+function allowedHosts(platform?: SourcePlatform): readonly string[] {
+  const chatgpt = ['chatgpt.com']
+  if (process.env.PLASMO_PUBLIC_ENABLE_SYNTHETIC === 'true') {
+    chatgpt.push('synthetic.chatstash.test')
+  }
+  const hosts: Record<SourcePlatform, readonly string[]> = {
+    chatgpt,
+    deepseek: ['chat.deepseek.com'],
+  }
+  return platform ? hosts[platform] : Object.values(hosts).flat()
 }
 
 export type SenderCheck = { ok: true } | { ok: false; reason: string }
@@ -42,7 +46,7 @@ export function isSupportedContentSender(
     return { ok: false, reason: 'invalid-sender-url' }
   }
 
-  const hosts = platform ? PLATFORM_HOSTS[platform] : Object.values(PLATFORM_HOSTS).flat()
+  const hosts = allowedHosts(platform)
   if (!hosts.includes(url.hostname)) return { ok: false, reason: 'unsupported-host' }
 
   return { ok: true }
@@ -50,7 +54,7 @@ export function isSupportedContentSender(
 
 export function hostMatchesPlatform(rawUrl: string, platform: SourcePlatform): boolean {
   try {
-    return PLATFORM_HOSTS[platform].includes(new URL(rawUrl).hostname)
+    return allowedHosts(platform).includes(new URL(rawUrl).hostname)
   } catch {
     return false
   }

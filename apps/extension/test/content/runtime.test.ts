@@ -7,6 +7,7 @@ import { clearAdapters, registerAdapter, syntheticAdapter } from '@chatstash/ada
 import { beforeEach, describe, expect, test } from 'vitest'
 
 import { ensureDevAdapters } from '@/content/dev-adapters'
+import { contentScriptMatches } from '@/content/matches'
 import { isSupportedPage, resolveAdapter } from '@/content/runtime'
 
 function loadFixture(name: string): Document {
@@ -139,5 +140,18 @@ describe('dev adapters registration', () => {
     process.env.PLASMO_PUBLIC_ENABLE_SYNTHETIC = ''
     ensureDevAdapters()
     expect(resolveAdapter(syntheticUrl())).toBeUndefined()
+  })
+})
+
+describe('content script matches', () => {
+  test('production matches are only ChatGPT and DeepSeek', () => {
+    expect(contentScriptMatches(false)).toEqual([
+      'https://chat.deepseek.com/*',
+      'https://chatgpt.com/*',
+    ])
+  })
+
+  test('dev flag adds the synthetic fixture host', () => {
+    expect(contentScriptMatches(true)).toContain('*://synthetic.chatstash.test/*')
   })
 })
