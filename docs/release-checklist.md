@@ -3,9 +3,8 @@
 ## Not yet a store release
 
 Stages 7–12 are implemented with unit/contract tests. Tasks **7.5**, **8.4**,
-**13.3**, **13.4**, and **13.7** still need live DeepSeek/ChatGPT smoke, user A/B
-RLS in a browser, and a scenario-by-scenario spec walkthrough. Do not call the
-MVP shipped until those pass.
+**13.3**, and **13.4** still need live DeepSeek/ChatGPT smoke and user A/B
+RLS in a browser. Do not call the MVP shipped until those pass.
 
 Search EXPLAIN for task 11.5 is in `docs/search-explain.md`.
 
@@ -19,6 +18,23 @@ Search EXPLAIN for task 11.5 is in `docs/search-explain.md`.
 - [ ] Web: `corepack pnpm --filter @chatstash/web dev`
 - [ ] Extension: `corepack pnpm --filter @chatstash/extension build` and load
       `apps/extension/build/chrome-mv3-prod` unpacked
+
+> **Environment note (2026-08-21):** Docker 29.7.2 on this machine no longer
+> honors bare `-e VAR` container env entries, which breaks `supabase start`
+> (the CLI passes `POSTGRES_PASSWORD`/`JWT_SECRET` as bare names; the Postgres
+> entrypoint then sees an empty password). The automated gates below were run
+> against a standalone `public.ecr.aws/supabase/postgres:17.6.1.158` container
+> started manually with explicit env (`POSTGRES_PASSWORD`, `JWT_SECRET`,
+> `JWT_EXP`), migrated via `supabase db reset --db-url …?sslmode=disable`,
+> linted via `supabase db lint --db-url …`, tested with a `supabase/pg_prove:3.36`
+> runner container (`docker cp` for test files + `PGHOST/PGPORT/…` env), and
+> typed via `supabase gen types typescript --db-url … --schema public --schema graphql_public`.
+> Two one-time setup steps were needed on that standalone DB to emulate the
+> CLI-managed stack: `CREATE EXTENSION pgtap` (dropped again before typegen)
+> and an `auth.uid()` override that also reads `request.jwt.claims` JSON
+> (matching the stack's function; the raw image only reads `request.jwt.claim.sub`).
+> If Docker is downgraded or the CLI fixes bare-env handling, prefer plain
+> `supabase start` / `db reset` / `test db`.
 
 ## Automated gates
 
@@ -36,11 +52,13 @@ corepack pnpm --filter @chatstash/extension build
 npx @fission-ai/openspec validate establish-chatstash-mvp --strict
 ```
 
-Last automated run (2026-08-18, local): frozen install, format/lint/typecheck,
-182 Vitest tests, `supabase test db` (90 pgTAP), `supabase db lint`, web production
-build, extension production build, OpenSpec strict validation. `supabase db reset`
-was not re-run in order to keep the local database; schema tests ran against the
-already-migrated instance.
+Last automated run (2026-08-21, local): frozen install, format/lint/typecheck,
+185 Vitest tests (10 shared + 55 adapters + 54 web + 66 extension), database
+reset against a fresh standalone Postgres 17.6 instance, `db lint` clean,
+90 pgTAP tests passing, generated-types diff **exact match**, web production
+build, extension production build, OpenSpec strict validation. See the
+environment note above for how the database gates were executed without
+`supabase start`.
 
 ## Permission / secret audit (task 13.1)
 
@@ -79,6 +97,59 @@ Plasmo only to chase those until a Plasmo release absorbs the patches.
 5. User B cannot read or infer user A's records.
 6. Manifest page matches are only ChatGPT, DeepSeek, and the synthetic test host.
    Privileged keys are absent from the browser bundle.
+
+### Adapter smoke record template (tasks 7.5 / 8.4 / 13.4)
+
+Copy this table once per platform per session; fill every cell, never paste
+conversation bodies:
+
+```text
+Platform: deepseek | chatgpt
+Date / time:
+Browser + version:
+Extension build (unpacked chrome-mv3-prod?):
+Supabase target (local 127.0.0.1:54321 | hosted origin):
+
+| Check                          | Result (pass/fail) | Selector tier used (primary/fallback) | Notes |
+|--------------------------------|--------------------|---------------------------------------|-------|
+| Save button appears on replies |                    |                                       |       |
+| Plain reply saved              |                    |                                       |       |
+| Code-block reply saved         |                    |                                       |       |
+| Table reply saved              |                    |                                       |       |
+| Streaming reply not saveable   |                    | n/a                                   |       |
+| Completes to saveable          |                    | n/a                                   |       |
+| Second save shows duplicate    |                    | n/a                                   |       |
+| Earlier turn pairs correctly   |                    |                                       |       |
+| SPA new-chat switch clean      |                    | n/a                                   |       |
+| History navigation clean       |                    | n/a                                   |       |
+| healthCheck diagnostics sane   |                    |                                       |       |
+
+Failures: file an adapter fix against its fixture set; do not loosen validation.
+```
+
+### User A/B security regression template (task 13.3)
+
+Run in a private window with two confirmed accounts; record pass/fail only:
+
+```text
+Date / builds:
+Web host: Extension build:
+
+| Check                                                              | Expected                       | Result |
+|--------------------------------------------------------------------|--------------------------------|--------|
+| B opens A's conversation URL from Extension save                    | opaque not-found               |        |
+| B guesses a conversation UUID in Dashboard URL                      | same not-found as missing      |        |
+| B lists conversations                                               | never contains A rows          |        |
+| B searches A's known title/content                                  | zero hits                      |        |
+| B attempts move/delete/tag of A's conversation via API              | rejected (RLS), no data change |        |
+| Data API grants snapshot (conversations/messages INSERT for auth.)  | absent                         |        |
+| RLS enabled on all six tables                                       | yes                            |        |
+| RPC EXECUTE revoked from anon                                       | yes                            |        |
+| Extension content context cannot read session token                 | yes                            |        |
+```
+
+Snapshot commands for the grant checks live in `supabase/tests/database/020_rls_isolation.test.sql`
+(the pgTAP suite already proves them; this browser pass re-verifies end to end).
 
 ## Known limits
 

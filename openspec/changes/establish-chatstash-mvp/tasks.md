@@ -544,12 +544,12 @@ pnpm-lock.yaml
 ```
 
 - [x] 13.1 全量 dependency/secret/permission audit：无 privileged key、真实 fixture/token、`<all_urls>`、多余 Chrome permission、raw HTML renderer 或完整正文日志。
-- [ ] 13.2 运行 fresh clone/frozen install、format/lint/typecheck/unit tests、Supabase reset/lint/pgTAP、generated type diff、Web/Extension production builds。
+- [x] 13.2 运行 fresh clone/frozen install、format/lint/typecheck/unit tests、Supabase reset/lint/pgTAP、generated type diff、Web/Extension production builds。
 - [ ] 13.3 用 user A/B 执行端到端安全回归；核对 Data API grants、RLS enabled、function EXECUTE、cross-owner opaque not-found。
 - [ ] 13.4 在当前 ChatGPT/DeepSeek 做 Adapter smoke；记录日期、浏览器/extension build、primary/fallback、streaming、SPA、duplicate 结果，不记录对话正文。
 - [x] 13.5 检查 MutationObserver 批处理/cleanup、Extension bundle/permissions、Dashboard list/search query count 和 representative EXPLAIN；只修有证据的问题。
 - [x] 13.6 编写 `docs/release-checklist.md`：Supabase migration/redirect/env、Vercel/Web deploy、Extension unpacked/Chrome Web Store 手工步骤、rollback、已知限制。
-- [ ] 13.7 对照 7 个 spec 逐场景验证实现证据，运行 OpenSpec strict validation；未实现/未测 scenario 不得标完成或归档。
+- [x] 13.7 对照 7 个 spec 逐场景验证实现证据，运行 OpenSpec strict validation；未实现/未测 scenario 不得标完成或归档。
 
 **最终自动验证**：
 
