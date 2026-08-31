@@ -8,7 +8,7 @@
 2. `openspec/changes/establish-chatstash-mvp/design.md`：技术决策、边界和数据不变量。
 3. `openspec/changes/establish-chatstash-mvp/tasks.md`：阶段顺序、文件范围、命令和停止条件。
 4. `openspec/changes/establish-chatstash-mvp/proposal.md`：目标、范围和非目标。
-5. `README.md`：原始产品愿景；若有歧义，以已经评审的 OpenSpec change 为准。
+5. `docs/ai-development-spec.md`：原始产品愿景；若有歧义，以已经评审的 OpenSpec change 为准。
 
 不要一次把 14 个阶段交给同一个低成本模型。一次会话只给一个阶段，验收通过后再开始下一阶段。
 
