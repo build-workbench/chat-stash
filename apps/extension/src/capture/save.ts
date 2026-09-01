@@ -63,7 +63,7 @@ export async function saveCapture(
     })
 
     if (error) {
-      return { ok: false, error: mapRpcError(error.message), message: undefined }
+      return { ok: false, error: mapRpcError(error), message: undefined }
     }
 
     const row = data?.[0]
@@ -81,12 +81,13 @@ export async function saveCapture(
   }
 }
 
-function mapRpcError(message: string): ErrorCode {
-  // A session can expire between getUser() and the RPC; RLS also rejects
-  // unauthenticated callers before the function body runs.
-  if (message.includes('AUTH_REQUIRED') || message.includes('permission denied')) {
+function mapRpcError(error: { message: string; code?: string; details?: string }): ErrorCode {
+  // Prefer structured code over substring matching; fall back to message for
+  // PostgREST/RLS permission errors that surface as plain text.
+  const text = `${error.code ?? ''} ${error.message ?? ''} ${error.details ?? ''}`
+  if (text.includes('AUTH_REQUIRED') || text.includes('permission denied') || error.code === '42501') {
     return 'AUTH_EXPIRED'
   }
-  if (message.startsWith('INVALID_')) return 'INVALID_CAPTURE'
+  if (text.includes('INVALID_')) return 'INVALID_CAPTURE'
   return 'SAVE_FAILED'
 }

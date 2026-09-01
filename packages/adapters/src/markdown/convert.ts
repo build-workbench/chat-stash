@@ -81,6 +81,14 @@ function createTurndownService(): TurndownService {
   return service
 }
 
+let singleton: TurndownService | null = null
+
+function getTurndownService(): TurndownService {
+  if (singleton) return singleton
+  singleton = createTurndownService()
+  return singleton
+}
+
 function normalizeMarkdown(input: string): string {
   const trimmed = input.replace(/^\s+/, '').replace(/\s+$/, '')
   return trimmed === '' ? '' : `${trimmed}\n`
@@ -89,7 +97,7 @@ function normalizeMarkdown(input: string): string {
 export function convertElementToMarkdown(root: HTMLElement): string {
   const clone = root.cloneNode(true) as HTMLElement
   removeNoise(clone)
-  return normalizeMarkdown(createTurndownService().turndown(clone))
+  return normalizeMarkdown(getTurndownService().turndown(clone))
 }
 
 export function extractReadableText(root: HTMLElement): string {

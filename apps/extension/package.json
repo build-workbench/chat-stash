@@ -33,7 +33,10 @@
       "storage"
     ],
     "host_permissions": [
-      "http://127.0.0.1:54321/*"
+      "http://127.0.0.1:54321/*",
+      "http://localhost:54321/*",
+      "https://*.supabase.co/*",
+      "https://*.supabase.com/*"
     ]
   }
 }

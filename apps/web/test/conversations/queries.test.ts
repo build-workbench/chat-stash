@@ -57,24 +57,20 @@ describe('conversation queries', () => {
   })
 
   test('lists owned summaries in saved_at desc order', async () => {
-    mockFrom.mockImplementation((table: string) => {
-      if (table === 'conversations') {
-        return chain({
-          data: [
-            {
-              id: ownedId,
-              title: 'One',
-              source_platform: 'deepseek',
-              source_url: 'https://chat.deepseek.com/a/chat/s/1',
-              folder_id: null,
-              saved_at: '2026-01-02T00:00:00.000Z',
-            },
-          ],
-          error: null,
-        })
-      }
-      return chain({ data: [], error: null })
+    mockRpc.mockResolvedValue({
+      data: [
+        {
+          conversation_id: ownedId,
+          title: 'One',
+          source_platform: 'deepseek',
+          source_url: 'https://chat.deepseek.com/a/chat/s/1',
+          folder_id: null,
+          saved_at: '2026-01-02T00:00:00.000Z',
+        },
+      ],
+      error: null,
     })
+    mockFrom.mockImplementation(() => chain({ data: [], error: null }))
 
     const result = await listConversations({})
     expect(result.ok).toBe(true)
@@ -82,6 +78,7 @@ describe('conversation queries', () => {
       expect(result.data.items[0].title).toBe('One')
       expect(result.data.items[0].id).toBe(ownedId)
     }
+    expect(mockRpc).toHaveBeenCalledWith('list_conversations_v1', expect.objectContaining({ p_limit: 31 }))
   })
 
   test('returns the same not-found for missing and unowned rows', async () => {

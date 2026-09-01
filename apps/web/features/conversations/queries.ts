@@ -23,57 +23,48 @@ export async function listConversations(input: {
   const limit = input.limit ?? LIMITS.pageSize.default
   const cursor = decodeListCursor(input.cursor)
 
-  let query = auth.supabase
-    .from('conversations')
-    .select('id, title, source_platform, source_url, folder_id, saved_at')
-    .order('saved_at', { ascending: false })
-    .order('id', { ascending: false })
-    .limit(limit + 1)
+  // Use versioned RPC to avoid client-side IN + max_rows truncation and to
+  // keep folder/tag + keyset pagination atomic on the server.
+  const { data, error } = await auth.supabase.rpc('list_conversations_v1', {
+    p_folder_id: input.folderId ?? null,
+    p_tag_id: input.tagId ?? null,
+    p_after_saved_at: cursor?.savedAt ?? null,
+    p_after_id: cursor?.id ?? null,
+    p_limit: limit + 1,
+  })
 
-  if (input.folderId) query = query.eq('folder_id', input.folderId)
-  if (cursor) {
-    query = query.or(
-      `saved_at.lt.${cursor.savedAt},and(saved_at.eq.${cursor.savedAt},id.lt.${cursor.id})`,
-    )
-  }
-
-  if (input.tagId) {
-    const tagged = await auth.supabase
-      .from('conversation_tags')
-      .select('conversation_id')
-      .eq('tag_id', input.tagId)
-    if (tagged.error) return { ok: false, error: 'NETWORK_ERROR' }
-    const ids = (tagged.data ?? []).map((row) => row.conversation_id)
-    if (ids.length === 0) return { ok: true, data: { items: [], nextCursor: null } }
-    query = query.in('id', ids)
-  }
-
-  const { data, error } = await query
   if (error) return { ok: false, error: 'NETWORK_ERROR' }
 
-  const page = data ?? []
+  const page = (data ?? []) as unknown as {
+    conversation_id: string
+    title: string
+    source_platform: 'chatgpt' | 'deepseek'
+    source_url: string
+    folder_id: string | null
+    saved_at: string
+  }[]
   const hasMore = page.length > limit
   const slice = hasMore ? page.slice(0, limit) : page
   const last = slice.at(-1)
   const nextCursor =
-    hasMore && last ? encodeListCursor({ savedAt: last.saved_at, id: last.id }) : null
+    hasMore && last ? encodeListCursor({ savedAt: last.saved_at, id: last.conversation_id }) : null
 
   const tagNames = await loadTagNames(
     auth.supabase,
-    slice.map((row) => row.id),
+    slice.map((row) => row.conversation_id),
   )
 
   return {
     ok: true,
     data: {
       items: slice.map((row) => ({
-        id: row.id,
+        id: row.conversation_id,
         title: row.title,
         sourcePlatform: row.source_platform,
         sourceUrl: row.source_url,
         folderId: row.folder_id,
         savedAt: row.saved_at,
-        tagNames: tagNames.get(row.id) ?? [],
+        tagNames: tagNames.get(row.conversation_id) ?? [],
       })),
       nextCursor,
     },
@@ -98,22 +89,20 @@ export async function getConversation(id: string): Promise<QueryResult<Conversat
   if (error) return { ok: false, error: 'NETWORK_ERROR' }
   if (!data) return { ok: false, error: 'NOT_FOUND' }
 
-  const messages = await auth.supabase
-    .from('messages')
-    .select('role, content_markdown, position')
-    .eq('conversation_id', data.id)
-    .order('position', { ascending: true })
+  const [messages, folderName, joins] = await Promise.all([
+    auth.supabase
+      .from('messages')
+      .select('role, content_markdown, position')
+      .eq('conversation_id', data.id)
+      .order('position', { ascending: true }),
+    data.folder_id
+      ? auth.supabase.from('folders').select('name').eq('id', data.folder_id).maybeSingle()
+      : Promise.resolve({ data: null as { name: string } | null, error: null }),
+    auth.supabase.from('conversation_tags').select('tag_id').eq('conversation_id', data.id),
+  ])
 
   if (messages.error) return { ok: false, error: 'NETWORK_ERROR' }
-
-  const folderName = data.folder_id
-    ? await auth.supabase.from('folders').select('name').eq('id', data.folder_id).maybeSingle()
-    : { data: null, error: null }
-
-  const joins = await auth.supabase
-    .from('conversation_tags')
-    .select('tag_id')
-    .eq('conversation_id', data.id)
+  if (joins.error) return { ok: false, error: 'NETWORK_ERROR' }
 
   const tagIds = (joins.data ?? []).map((row) => row.tag_id)
   const tagRows =

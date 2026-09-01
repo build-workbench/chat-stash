@@ -6,11 +6,21 @@ import {
 } from '@chatstash/shared'
 
 function encodeJson(value: unknown): string {
-  return Buffer.from(JSON.stringify(value), 'utf8').toString('base64url')
+  const json = JSON.stringify(value)
+  const bytes = new TextEncoder().encode(json)
+  let binary = ''
+  for (const byte of bytes) binary += String.fromCharCode(byte)
+  const base64 = btoa(binary)
+  return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '')
 }
 
 function decodeJson(raw: string): unknown {
-  return JSON.parse(Buffer.from(raw, 'base64url').toString('utf8'))
+  let base64 = raw.replace(/-/g, '+').replace(/_/g, '/')
+  const pad = base64.length % 4
+  if (pad) base64 += '='.repeat(4 - pad)
+  const binary = atob(base64)
+  const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0))
+  return JSON.parse(new TextDecoder().decode(bytes))
 }
 
 export function encodeListCursor(cursor: ListCursor): string {

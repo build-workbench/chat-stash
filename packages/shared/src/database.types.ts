@@ -300,6 +300,23 @@ export type Database = {
           deleted: boolean
         }[]
       }
+      list_conversations_v1: {
+        Args: {
+          p_after_id?: string | null
+          p_after_saved_at?: string | null
+          p_folder_id?: string | null
+          p_limit?: number
+          p_tag_id?: string | null
+        }
+        Returns: {
+          conversation_id: string
+          folder_id: string | null
+          saved_at: string
+          source_platform: Database["public"]["Enums"]["source_platform"]
+          source_url: string
+          title: string
+        }[]
+      }
       save_capture_v1: {
         Args: {
           p_assistant_markdown: string
