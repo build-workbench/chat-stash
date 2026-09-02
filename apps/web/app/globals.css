@@ -1,3 +1,27 @@
+@font-face {
+  font-family: 'Resource Han Rounded CN';
+  src: url('/fonts/han-rounded.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Resource Han Rounded CN';
+  src: url('/fonts/han-rounded-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Code New Roman';
+  src: url('/fonts/code-new-roman.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
   --bg: #f7f7f5;
@@ -8,12 +32,13 @@
   --accent: #1f4e3d;
   --danger: #9b2c2c;
   --focus: #2f6f55;
-  font-family:
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    sans-serif;
+  --font-sans:
+    'Resource Han Rounded CN', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', sans-serif;
+  --font-mono:
+    'Code New Roman', ui-monospace, 'SFMono-Regular', Menlo, Consolas,
+    monospace;
+  font-family: var(--font-sans);
 }
 
 * {
@@ -140,6 +165,11 @@ button.danger {
   padding: 0.75rem;
   background: #f3f3ef;
   border-radius: 8px;
+  font-family: var(--font-mono);
+}
+
+.markdown-body code {
+  font-family: var(--font-mono);
 }
 
 .markdown-body table {
