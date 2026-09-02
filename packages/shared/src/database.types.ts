@@ -302,15 +302,15 @@ export type Database = {
       }
       list_conversations_v1: {
         Args: {
-          p_after_id?: string | null
-          p_after_saved_at?: string | null
-          p_folder_id?: string | null
+          p_after_id?: string
+          p_after_saved_at?: string
+          p_folder_id?: string
           p_limit?: number
-          p_tag_id?: string | null
+          p_tag_id?: string
         }
         Returns: {
           conversation_id: string
-          folder_id: string | null
+          folder_id: string
           saved_at: string
           source_platform: Database["public"]["Enums"]["source_platform"]
           source_url: string

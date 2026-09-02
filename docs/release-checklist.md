@@ -60,6 +60,25 @@ build, extension production build, OpenSpec strict validation. See the
 environment note above for how the database gates were executed without
 `supabase start`.
 
+Re-verified (2026-09-02, local): frozen install, format/lint/typecheck and all
+185 Vitest tests green; database gates re-run against the standalone
+`sbtest-db` container (port 54330): reset + seed clean, `db lint` clean,
+90 pgTAP tests passing, generated-types diff exact match; web and extension
+production builds green with the expected manifest (permissions `storage`
+only, content matches only the two AI hosts + synthetic test host, no
+`<all_urls>`); OpenSpec strict validation passes. Task 13.3 database-layer
+A/B regression re-run live: user B sees zero rows via list/detail/search for
+user A's capture, direct UPDATE/DELETE against A's rows is rejected (or
+affects 0 rows under RLS), and A's data stays intact.
+
+> **2026-09-02 test-runner note:** the interactive shell had
+> `NODE_ENV=production` exported, which loads React production builds and
+> breaks `@testing-library/react` (`React.act is not a function`) and the
+> jsdom vitest environment (`No such built-in module: node:` on `node:fs`
+> fixture reads). All Vitest gates must run with `NODE_ENV` unset (the CI
+> runner does this by default).
+
+
 ## Permission / secret audit (task 13.1)
 
 Production-shaped `chrome-mv3-prod` manifest:

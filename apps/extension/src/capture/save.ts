@@ -85,7 +85,11 @@ function mapRpcError(error: { message: string; code?: string; details?: string }
   // Prefer structured code over substring matching; fall back to message for
   // PostgREST/RLS permission errors that surface as plain text.
   const text = `${error.code ?? ''} ${error.message ?? ''} ${error.details ?? ''}`
-  if (text.includes('AUTH_REQUIRED') || text.includes('permission denied') || error.code === '42501') {
+  if (
+    text.includes('AUTH_REQUIRED') ||
+    text.includes('permission denied') ||
+    error.code === '42501'
+  ) {
     return 'AUTH_EXPIRED'
   }
   if (text.includes('INVALID_')) return 'INVALID_CAPTURE'

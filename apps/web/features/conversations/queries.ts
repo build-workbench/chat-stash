@@ -26,10 +26,10 @@ export async function listConversations(input: {
   // Use versioned RPC to avoid client-side IN + max_rows truncation and to
   // keep folder/tag + keyset pagination atomic on the server.
   const { data, error } = await auth.supabase.rpc('list_conversations_v1', {
-    p_folder_id: input.folderId ?? null,
-    p_tag_id: input.tagId ?? null,
-    p_after_saved_at: cursor?.savedAt ?? null,
-    p_after_id: cursor?.id ?? null,
+    p_folder_id: input.folderId ?? undefined,
+    p_tag_id: input.tagId ?? undefined,
+    p_after_saved_at: cursor?.savedAt ?? undefined,
+    p_after_id: cursor?.id ?? undefined,
     p_limit: limit + 1,
   })
 

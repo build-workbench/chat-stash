@@ -78,7 +78,10 @@ describe('conversation queries', () => {
       expect(result.data.items[0].title).toBe('One')
       expect(result.data.items[0].id).toBe(ownedId)
     }
-    expect(mockRpc).toHaveBeenCalledWith('list_conversations_v1', expect.objectContaining({ p_limit: 31 }))
+    expect(mockRpc).toHaveBeenCalledWith(
+      'list_conversations_v1',
+      expect.objectContaining({ p_limit: 31 }),
+    )
   })
 
   test('returns the same not-found for missing and unowned rows', async () => {
