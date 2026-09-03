@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "ChatStash 架构总览",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "output": "chatstash-architecture.html",
+    "repository": {
+      "url": "https://github.com/build-workbench/chat-stash",
+      "revision": "3a44eadd8423a650ebab1eb34f91666fc46c83a5"
+    },
+    "views": [
+      { "id": "save-path", "label": "保存主链路", "focus": ["ai-page", "content-script", "background-sw", "supabase-data", "postgres"], "note": "从用户在 AI 页面点击保存到单事务落库的完整链路。" },
+      { "id": "dashboard-path", "label": "浏览与管理", "focus": ["dashboard", "supabase-data", "postgres"], "note": "Web Dashboard 通过 Data API 浏览、搜索与导出。" },
+      { "id": "identity", "label": "身份与权限", "focus": ["background-sw", "dashboard", "supabase-auth", "supabase-data", "postgres"], "note": "Web 与扩展共享同一账号，但各自独立管理会话。" }
+    ]
+  },
+  "components": [
+    { "id": "ai-page", "type": "external", "label": "AI 对话页", "sublabel": "ChatGPT / DeepSeek", "tag": "不可信 DOM", "pos": [40, 320], "size": [140, 72] },
+    { "id": "content-script", "type": "frontend", "label": "Content Script", "sublabel": "采集 DOM · 无 token", "sources": [{ "path": "apps/extension/src/contents/chatstash.tsx" }], "pos": [280, 320], "size": [160, 72] },
+    { "id": "background-sw", "type": "frontend", "label": "Background SW", "sublabel": "持会话 · 联网", "tag": "MV3", "sources": [{ "path": "apps/extension/src/background.ts" }, { "path": "apps/extension/src/capture/save.ts" }], "pos": [540, 320], "size": [170, 72] },
+    { "id": "adapters", "type": "frontend", "label": "平台 Adapters", "sublabel": "DeepSeek · ChatGPT", "tag": "Synthetic 测试", "sources": [{ "path": "packages/adapters/src/registry.ts" }], "pos": [280, 520], "size": [160, 72] },
+    { "id": "dashboard", "type": "frontend", "label": "Web Dashboard", "sublabel": "Next.js App Router", "tag": "SSR Cookie", "sources": [{ "path": "apps/web/app/(dashboard)/conversations/page.tsx" }], "pos": [860, 560], "size": [170, 72] },
+    { "id": "supabase-auth", "type": "security", "label": "Supabase Auth", "sublabel": "邮箱密码 · JWT", "pos": [860, 120], "size": [150, 72] },
+    { "id": "supabase-data", "type": "backend", "label": "Data API / RPC", "sublabel": "PostgREST", "tag": "save_capture_v1", "sources": [{ "path": "supabase/migrations/20260813000006_rpc_save_and_delete.sql" }], "pos": [860, 320], "size": [150, 72] },
+    { "id": "postgres", "type": "database", "label": "PostgreSQL", "sublabel": "RLS · 同用户约束", "sources": [{ "path": "supabase/migrations/20260813000005_rls_and_grants.sql" }], "pos": [1100, 320], "size": [160, 72] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Chrome 扩展（MV3）", "wraps": ["content-script", "background-sw", "adapters"] },
+    { "kind": "region", "label": "Supabase Cloud", "wraps": ["supabase-auth", "supabase-data", "postgres"] }
+  ],
+  "connections": [
+    { "id": "save-click", "from": "ai-page", "to": "content-script", "label": "点击保存", "variant": "emphasis" },
+    { "id": "adapter-rule", "from": "content-script", "to": "adapters", "label": "提取规则", "variant": "dashed", "labelAt": [360, 425] },
+    { "id": "runtime-message", "from": "content-script", "to": "background-sw", "label": "runtime message" },
+    { "id": "save-rpc", "from": "background-sw", "to": "supabase-data", "label": "save_capture_v1", "variant": "emphasis", "labelDy": 24 },
+    { "id": "rpc-sql", "from": "supabase-data", "to": "postgres", "label": "SQL · 单事务" },
+    { "id": "ext-auth", "from": "background-sw", "to": "supabase-auth", "label": "登录 / 注销" },
+    { "id": "web-data", "from": "dashboard", "to": "supabase-data", "label": "Data API", "fromSide": "top", "toSide": "bottom" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "保存链路", "items": ["仅在用户点击保存后上传该次问答，不自动采集页面", "Adapter 提取 DOM → Markdown，只存 Markdown 一份正文", "save_capture_v1 单事务落库，dedupe_key 幂等去重"] },
+    { "dot": "emerald", "title": "浏览与管理", "items": ["无限层级文件夹、标签、全文搜索与 Markdown 导出", "展示 / 搜索 / 导出共用同一份 Markdown 数据"] },
+    { "dot": "rose", "title": "安全", "items": ["Content Script 无 token，会话只在 Background SW", "前端只用 publishable key，授权落在 RLS 与数据库约束", "Web 与扩展共享账号，各自独立管理会话"] }
+  ]
+}

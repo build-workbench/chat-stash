@@ -14,6 +14,10 @@
 
 ## 架构
 
+交互式架构图（可切换主题 / 缩放 / 聚焦视图，来自 [Archify](https://archify.ai)）：
+
+[![ChatStash 架构总览](docs/screenshots/chatstash-architecture.png)](docs/chatstash-architecture.html)
+
 ```text
 AI 页面 → Content Script（采集，无 token）
         → Background Service Worker（持会话并联网）
