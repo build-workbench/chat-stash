@@ -1,7 +1,7 @@
 schema: spec-driven
 
 context: |
-  ChatStash（快存）是一个将 AI 网站中的单次用户提问和对应 AI 回复保存到云端，
+  ChatStash · 拾语是一个将 AI 网站中的单次用户提问和对应 AI 回复保存到云端，
   再由 Web Dashboard 统一检索、整理和导出的 Chrome Extension + SaaS MVP。
   技术栈固定为 TypeScript、React、Plasmo、Chrome Manifest V3、Next.js App Router、
   Tailwind CSS、shadcn/ui、Supabase Auth 和 Supabase PostgreSQL。

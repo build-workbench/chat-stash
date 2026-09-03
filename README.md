@@ -1,4 +1,4 @@
-# ChatStash（快存）
+# ChatStash · 拾语
 
 面向 AI 重度用户的跨平台 AI 对话收藏与知识管理工具。在 ChatGPT、DeepSeek 等对话页一键保存问答至云端，并在 Web 端统一整理、搜索与导出。
 
