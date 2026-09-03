@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState } from 'react'
+import { use, useActionState } from 'react'
 import { useFormStatus } from 'react-dom'
 
 type Field = {
@@ -55,14 +55,14 @@ export function AuthForm({ action, submitLabel, fields, searchParams }: AuthForm
   )
 }
 
-async function FormMessage({
+function FormMessage({
   searchParams,
   state,
 }: {
   searchParams: Promise<{ error?: string; message?: string }>
   state: { error?: string; message?: string }
 }) {
-  const params = await searchParams
+  const params = use(searchParams)
   const error = state.error ?? params.error
   const message = state.message ?? params.message
 
@@ -70,8 +70,8 @@ async function FormMessage({
 
   return (
     <div role="alert" aria-live="polite">
-      {error ? <p style={{ color: 'red' }}>{error}</p> : null}
-      {message ? <p style={{ color: 'green' }}>{message}</p> : null}
+      {error ? <p className="auth-msg auth-msg--error">{error}</p> : null}
+      {message ? <p className="auth-msg auth-msg--success">{message}</p> : null}
     </div>
   )
 }
