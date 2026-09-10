@@ -15,3 +15,9 @@ coverage/
 
 # 本地工具状态
 .commandcode/
+
+# AI tools (local only)
+.claude/
+.codex/
+.agents/
+.superpowers/
