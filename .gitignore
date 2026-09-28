@@ -21,3 +21,7 @@ coverage/
 .codex/
 .agents/
 .superpowers/
+
+# AI 工具本地状态（skills CLI 技能载荷与锁文件，不入库）
+agent/
+skills-lock.json
