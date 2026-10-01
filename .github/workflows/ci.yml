@@ -3,7 +3,21 @@ name: CI
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - 'openspec/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
   pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'openspec/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   lint-typecheck:
