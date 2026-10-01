@@ -1,3 +1,7 @@
+**English** | [中文](#chinese)
+
+<a id="top"></a>
+
 # ChatStash · 拾语
 
 A cross-platform AI conversation saving and knowledge management tool for heavy AI users. Save Q&A from conversation pages such as ChatGPT and DeepSeek to the cloud with one click, then organize, search, and export them in a unified way on the Web.
@@ -71,6 +75,7 @@ pnpm dev
 
 ---
 <a id="chinese"></a>
+[English](#top) | **中文**
 
 # ChatStash · 拾语
 
