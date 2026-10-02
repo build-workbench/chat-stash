@@ -73,6 +73,10 @@ pnpm dev
 - [Release checklist](docs/release-checklist.md)
 - [Product vision and architecture spec](docs/ai-development-spec.md)
 
+## License
+
+[MIT](LICENSE)
+
 ---
 <a id="chinese"></a>
 [English](#top) | **中文**
@@ -147,3 +151,7 @@ pnpm dev
 - [验收测试指南](docs/manual-acceptance-guide.md)
 - [发布核对清单](docs/release-checklist.md)
 - [产品愿景与架构规范](docs/ai-development-spec.md)
+
+## 开源协议
+
+[MIT](LICENSE)
